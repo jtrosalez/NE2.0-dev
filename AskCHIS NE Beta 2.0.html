@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>AskCHIS NE 2.0 Beta</title>
+	
+    <script type="text/javascript"
+	    src="https://public.tableau.com/javascripts/api/tableau-2.min.js"></script>
+		<script type="module" src="https://public.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/jquery-tooltip@0.2.1/jquery.tooltip.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/themes/base/jquery-ui.min.css"/>
+	<link href="https://db.onlinewebfonts.com/c/47751054963dad4aa2c6fd1b7372567f?family=News+Cycle" rel="stylesheet">
+	<style>
+		#btn-filter{display: none;}
+		#btn-filter2{display: none;}
+		#info{display: none;}
+		#modalOpn{display:none;}
+		#modalOpn2{display:none;}
+		#modalOpn3{display: none;}
+		.modal {max-width: 1500px !important;}
+		#toolbar-container{display: none !important;}
+		table, th, td {
+			border:1px solid black;
+			border-collapse: collapse;
+		}
+		form {font-family: "News Cycle";}
+		button {font-family: "News Cycle" ! important; font-size: small ! important;}
+		#sub {font-family: "News Cycle" ! important;}
+		input {font-family: "News Cycle" ! important;}
+		#intro{font-family: "News Cycle" ! important; font-weight: normal ! important; font-size: normal ! important;}
+		input[type=text]{width:100%;}
+		#info {font-family: "News Cycle" ! important;}
+		#addressLookUp{display: none;}
+		.legisName{font-size: small;}
+		.copy{cursor: pointer}
+		.ui-tooltip-content{font-family: "News Cycle" ! important; font-size: small ! important;}
+		#copyMessage{display: none; text-align: center;}
+		.ui-tabs{border: none ! important; font-family: "News Cycle" ! important; font-weight: bold ! important; font-size: large ! important;}
+		.modal{font-family: "News Cycle" ! important;}
+		.help{font-weight: normal;}
+		.error{color: red ! important;}
+		.biggie{font-size: larger ! important;}
+		.email{color: blue ! important;}
+		#mapPicker{text-align: center; margin: auto; width: 60%;}
+	</style>
+	
+   <script type="text/javascript">
+	
+		function initializeMap() {
+			var placeholderDiv = document.getElementById("tableauViz");
+			var url = "https://public.tableau.com/views/NETester_v1_1_1/Map";
+			var options = {
+				//width: placeholderDiv.offsetWidth,
+				//height: placeholderDiv.offsetHeight,
+				hideTabs: true,
+				hideToolbar: true,
+				onFirstInteractive: function () {
+					workbook = viz.getWorkbook();
+					activeSheet = workbook.getActiveSheet();
+					//listenToMarksSelection();
+				}
+			};
+			viz = new tableau.Viz(placeholderDiv, url, options);
+		}    
+
+		function initializeTable() {
+			var placeholderDiv = document.getElementById("tableauViz");
+			var url = "https://public.tableau.com/views/NETester_v1_1_1/DataTable";
+			var options = {
+				//width: placeholderDiv.offsetWidth,
+				//height: placeholderDiv.offsetHeight,
+				hideTabs: true,
+				hideToolbar: true,
+				onFirstInteractive: function () {
+					workbook = viz.getWorkbook();
+					activeSheet = workbook.getActiveSheet();
+					//listenToMarksSelection();
+				}
+			};
+			viz = new tableau.Viz(placeholderDiv, url, options);
+		}    		
+		
+		//MARK FOR DELETION!!!!!!
+			
+		/*function listenToMarksSelection() {
+            viz.addEventListener(tableau.TableauEventName.MARKS_SELECTION, onMarksSelection);
+        }
+
+        function onMarksSelection(marksEvent) {
+            return marksEvent.getMarksAsync().then(reportSelectedMarks);
+        }
+
+        function reportSelectedMarks(marks) {
+            var html = "";
+
+            for (var markIndex = 0; markIndex < marks.length; markIndex++) {
+                var pairs = marks[markIndex].getPairs();
+                html += "<b>Mark " + markIndex + ":</b><ul>";
+
+                for (var pairIndex = 0; pairIndex < pairs.length; pairIndex++) {
+                    var pair = pairs[pairIndex];
+                    html += "<li><b>Field Name:</b> " + pair.fieldName;
+                    html += "<br/><b>Value:</b> " + pair.formattedValue + "</li>";
+                }
+
+                html += "</ul>";
+            }
+			
+			var population = pairs[7].value;
+			var prevalence = pairs[8].value;
+			
+			console.log(prevalence/population);
+        }*/
+		
+		function copyToClipboard(elementId) {
+
+		// Create a "hidden" input
+		var aux = document.createElement("input");
+
+		// Assign it the value of the specified element
+		aux.setAttribute("value", document.getElementById(elementId).innerHTML);
+
+		// Append it to the body
+		document.body.appendChild(aux);
+
+		// Highlight its content
+		aux.select();
+
+		// Copy the highlighted text
+		document.execCommand("copy");
+
+		// Remove it from the body
+		document.body.removeChild(aux);
+		
+		$("#copyMessage").show().delay(1000).toggle("fade");
+
+	}
+		
+
+		// Display information about selected marks.
+        async function handleMarksSelection(e) {
+            const marksCollection = await e.detail.getMarksAsync();
+            const marksData = marksCollection.data[0];
+            let html = "";
+		
+
+            for (let markIndex = 0; markIndex < marksData.totalRowCount; markIndex++) {
+                html += `<b>Mark ${markIndex}:</b><ul>`;
+
+                for (let columnIndex = 3; columnIndex < 4; columnIndex++) {
+                    html += `<li><b>Field Name:</b> ${marksData.columns[columnIndex].fieldName}`;
+                    html += `<br/><b>Value:</b> ${marksData.data[markIndex][columnIndex].formattedValue} </li>`;
+					var name = marksData.data[markIndex][columnIndex].formattedValue;
+                }
+            }
+			console.log(name);
+		
+			var sheet = viz.getWorkbook().getActiveSheet();
+			sheet.applyFilterAsync("Name", name, tableau.FilterUpdateType.ADD);
+			
+        }
+		
+		
+    </script>
+</head>
+
+<body>
+	<div id="tabs">
+		<ul>
+			<li><a href=".tabs-1" id="home">Home</a></li>
+			<li><a href=".tabs-2" id="btn-map">Create Map</a></li>
+			<li><a href=".tabs-3" id="btn-tbl">Create Table</a></li>
+		</ul>
+	<button type="button" id="btn-filter">Filter Table with Map</button>
+	<button type="button" id="addressLookUp">Address Lookup</button>
+	<button type="button" id="btn-filter2">Clear Geography Filter</button>
+	<div id="intro">
+	<p>Welcome to the updated AskCHIS Neighborhood Edition (AskCHIS NE)!</p>
+	<p>In this version of AskCHIS NE you will find similar features as the old platform and some new additions.</p>
+	<p><b>Create a Map</b>
+	<br>
+	Click on the "Create a Map" tab above to view a map display of modeled CHIS estimates as well as Sociodemographic and other health indice data.
+	</p>
+	<p><b>Create a Table</b>
+	<br>
+	Click on the "Create a Table" tab avove to create a table display of the data and to download estimates for the different geographies you select.
+	</p>
+	<button type="button" id="help">Help</button>
+	</div>
+	<div id="mapViz">
+    <div id="tableauViz" style="width:800px; height:700px;"></div>
+	</div>
+	<div id="ex1" class="modal">
+	<div id="mapPicker">
+	<div>Select geographies from the map to add to your data table. Please note you can add no more than five geographies to your data table.</div>
+	<tableau-viz id="tableauVizMapPicker" src="https://public.tableau.com/views/NE-MapPicker/NE-MapPicker" onMarkSelectionChanged="handleMarksSelection" onFirstInteractive="firstInteractive" height='700px' width='1000px'></tableau-viz>
+	</div>
+	<p><a href="#ex1" rel="modal:open" id="modalOpn">Open Modal</a></p>
+	</div>
+</body>
+</div>
+<div id="ex3" class="modal">
+<div id="tabs-hlp">
+		<ul>
+			<li><a href="#tabs-1" id="tab-hlp1">How to...</a></li>
+			<li><a href="#tabs-2" id="btn-hlp2">General Information</a></li>
+			<li><a href="#tabs-3" id="btn-hlp3">Indicator Information</a></li>
+			<li><a href="#tabs-4" id="btn-hlp4">Data Limitations and Use</a></li>
+			<li><a href="#tabs-5" id="btn-hlp5">Methodology Brief</a></li>
+			<li><a href="#tabs-6" id="btn-hlp6">GIS Information</a></li>
+			<li><a href="#tabs-7" id="btn-hlp7">FAQs</a></li>
+		</ul>
+		
+<div id="tabs-1" class="help">
+<div class="biggie"><b>PLACEHOLDER FOR HOW TO....</b></div>
+</div>
+<div id="tabs-2" class="help">
+<div class="biggie"><b>General Application & Data Information</b></div>
+ 
+<p>AskCHIS Neighborhood Edition (AskCHIS NE) is an online data dissemination and visualization platform that provides population health estimates at sub-county geographic regions. With AskCHIS NE, you can access and visualize authoritative health data at the zip code, city, county, and legislative district geographic levels.
+</p><p>Estimates are powered by data from The California Health Interview Survey (CHIS) and are created through a sophisticated modeling technique called small area estimation (SAE). Before using estimates from AskCHIS NE, we recommend reading more about our methodology and data limitations.
+</p>
+
+<p><b>System Compatibility</b></p>
+
+<p>AskCHIS NE is compatible with most modern browsers, including Internet Explorer 9 and up, Google Chrome, Mozilla Firefox, and Safari. Users with Internet Explorer 8 or below need to download and install a newer browser, such as any of those listed previously. 
+
+</p><p>If you feel that some features are not working as expected, please contact us to report an issue.
+</p>
+</div>
+<div id="tabs-3" class="help">
+<div class="biggie"><b>PLACEHOLDER FOR INDICATOR INFORMATION</b></div>
+</div>
+<div id="tabs-4" class="help">
+<div class="biggie"><p><b>Data Limitations & Use</b></p></div>
+ 
+<p>Health estimates available in AskCHIS NE are model-based small area estimates (SAEs) except state-level estimates and some county estimates. These estimates are the result of complex statistical modeling that uses relevant characteristics of populations and geographical areas to predict health conditions for small geographic units (cities, zip codes, some counties). SAEs are not direct estimates (estimates produced directly from survey data, such as those provided through AskCHIS). While direct estimates are produced solely using survey data and design weights, the model-based estimates in AskCHIS NE also rely on secondary data describing characteristics of both geographic regions and populations. AskCHIS NE users should decide on the appropriateness of using model-based SAEs based on the strengths and limitations briefly discussed below and elaborated in the methodology documentation.
+
+
+</p><p>In developing final local-level estimates, data from The California Health Interview Survey (CHIS) were used as the primary data source for modeling. Area-level data providing contextual information was provided by the American Community Survey (ACS). Population characteristics were provided by Nielsen-Claritas Pop-Facts (Claritas) data.
+
+
+</p><p>Health estimates in AskCHIS NE are subject to errors that can impact data accuracy: sampling error and non-sampling error of the input data, and model error.
+
+
+</p><p><b>Sampling Error</b>
+
+</p><p>Sampling errors occur because inferences about the entire population are based on information obtained from only a sample of that population. If the sample is representative, as with CHIS, then the sampling errors are reduced. The models for AskCHIS NE health estimates are built on samples of California residents from CHIS and ACS instead of on information from all members of the California population.
+
+
+</p><p><b>Non-Sampling Error</b>
+
+</p><p>Non-sampling errors include coverage errors, measurement errors (respondent, interviewer, questionnaire, collection method, etc.), non-response errors and processing errors. CHIS and ACS data, as with all survey data, are subject to these errors. Non-sampling errors are partially corrected through post-collection data cleaning and weighting processes. Claritas data are based on Census data and administrative data, and thus also subject to non-sampling errors.
+
+
+</p><p><b>Model Error</b>
+
+</p><p>Generally, model errors occur when the statistical model does not account for all the information contributing to variation of the dependent variable. In AskCHIS NE, we reduce model error by borrowing strength from several data sources to inform our statistical models.
+
+
+
+</p><p><b>Notice Regarding Demographic Variables</b>
+
+</p><p>Demographic variables available in AskCHIS NE were produced using data from the American Community Survey (ACS). These data were adjusted to match the CHIS population - which excludes the population living in group quarters (such as prisons, hospitals, dormitories, etc.). The demographic variables are included in AskCHIS NE to provide additional context to health estimates and may not be generalized to the entire population of California. AskCHIS NE is a public health surveillance tool, not an official source of demographic information. Demographic information available in AskCHIS NE is not meant to replace data from the U.S. Census.
+
+
+</p><p><div class="error"><b>Liability Disclaimer</b>
+
+</p><p>Your use of estimates, data, and features from AskCHIS Neighborhood Edition signifies agreement that the Regents of the University of California, UCLA, the UCLA Center for Health Policy Research, and The California Health Interview Survey, shall not be liable for any activity involving these data, estimates, or features of them for any purpose.
+</p></div>
+</div>
+
+<div id="tabs-5" class="help">
+<div class="biggie"><p><b>Methodology Brief</b></p></div>
+ 
+<p><b>Neighborhood Edition Data Sources</b></p>
+
+
+<p>Survey Data: The California Health Interview Survey (CHIS) is the nation’s largest state health survey (over 40,000 adult, child and teen respondents) and has been conducted every other year from 2001 through 2009, and every year since 2011. CHIS provides important information on the health, health behaviors and access to health care services of Californians. Conducted and disseminated by the UCLA Center for Health Policy Research (the Center) since 2001, CHIS data and analytic results are used extensively in California in policy development, service planning and research, and is recognized and valued nationally as a model population-based health survey. The current AskCHIS NE estimates are based on CHIS 2015-2016 data.
+Population data: Nielsen Claritas. These data consist of projected population data provided by Nielsen, a San Diego-based private marketing research firm. Total population and household estimates are based on estimates produced by the Census Bureau, as well as information from state and local agencies. The Claritas data has been augmented using modeled distributions of income-to-poverty ratios in CHIS 2015-2016. The resulting dataset was further adjusted to multiple CHIS weighting dimensions using proportional-iterative-fitting so that it represents the population of the CHIS sample design.
+Contextual data: American Community Survey (ACS). Publicly available ACS 2012-2016 5-Year summary tables were downloaded at the census tract level. We used 236 variables and classified them into 22 socio-demographic categories. Principal component analysis was conducted on each of the 22 set of variables. The first principal component of each set were used for a second principal component analysis, and two principal components with the largest variance were eventually used as contextual variables in the model for health estimates.
+
+
+</p><p><b>Modeling Health Indicators</b></p>
+</p><p>Models are first built using both survey data and contextual data. These models began with a unit-level generalized linear mixed model that includes individual level fixed predictors to capture individual effects and a random effect at the survey strata level to take into account the survey design. In addition, a non-parametric function of census tract level auxiliary variables was added to the unit-level parametric model to better reflect the non-linear association between the contextual variables and the health indicator or outcome.
+
+</p><p>The estimated model parameters were then applied to the population dataset with the same set of independent variables, and merged with contextual variables to obtain the predicted probabilities at the individual level. Finally, individual-level predicted values were aggregated into area level estimates for different sets of areas, such as ZIP codes, cities, and legislative districts.
+
+
+</p><p><b>Calibration and Validation
+
+</b></p><p>The estimates were calibrated through a two-step process. First, a random intercept from each stratum was included in the model to take the sampling design into account and to "soft-calibrate" modeled estimates to approach direct estimates from CHIS when aggregated to the stratum level. Second, when specific predicted values for some geographic levels fell outside acceptable limits relative to the observed direct estimates, the modeled estimates were adjusted through "hard-calibration" - applying proportions of direct estimates to the modeled estimates at strata level and the variances of the small area estimates adjusted accordingly.
+
+</p><p>The calibrated modeled estimates were validated in the following ways. First, they were checked against the observed values at larger geographic levels (stratum level) where the direct estimates were stable. Scatter plots of predicted and observed estimates at the stratum level were used for this purpose. Second, the modeled estimates were compared to external information that was not used in our estimation process, including direct estimates from previous CHIS cycles or relevant non-CHIS sources. Finally, local area subject-matter experts were consulted to examine modeled estimates.
+
+
+</b></p><p><b>Stability and Pooling
+
+</b></p><p>The coefficient of variation (CV) was calculated for each estimate to assess statistical stability. The coefficient of variation is defined as the ratio between the standard error of the point estimate and the point estimate. A point estimate with CV ≥ 30% is considered unstable. Unstable estimates and estimates for areas with a population universe of less than 1,000 are suppressed.
+
+</p><p>For unstable estimates, or estimates for areas with a population universe of less than 1,000, geographic locations may be combined to produce stable estimates or to achieve a sufficiently large population. The pooled point estimate and variance are population-weighted averages of the original point and variance estimates. The confidence intervals and coefficient of variations are adjusted accordingly.
+</p></div>
+<div id="tabs-6" class="help">
+<div class="biggie"><p><b>GIS Information</b></p></div>
+ 
+<p>AskCHIS NE produces thematic web maps using standard shapefiles provided by the U.S. Census through the TIGER/Line® service. To create an on-screen map, 2013 TIGER/Line shapefiles for the state of California, counties, cities, ZIP code tabulation areas, as well as State Assembly, State Senate, and the 113th U.S. Congressional Districts were used (released August 22, 2013).
+
+
+</p><p><b>ZCTA vs. ZIP Code
+
+</b></p><p>5-Digit ZIP Code Tabulation Areas (ZCTAs) are approximate representations of U.S. Postal Service 5-digit service areas. The Census Bureau defines ZCTAs by allocating each block that contains addresses to a single ZIP Code Tabulation Area, usually to the ZCTA that reflects the most frequent occuring ZIP code for the addresses within that tabulation block. AskCHIS NE provides data at the ZCTA level.
+
+</p><p><b>What does it mean for my ZIP code?
+
+</b></p><p>Some census blocks that do not contain addresses but are completely surrounded by a single ZCTA are assigned to the surrounding ZCTA. This means that residents in a specific ZIP code may have been distributed to a ZCTA different from their actual ZIP code. Per the recommendation of the U.S. Census, data users should not use ZCTAs to identify the official USPS ZIP code for mail delivery as there may be ZIP codes that are primarily non-residential that may not have a corresponding ZCTA. The USPS makes periodic changes to ZIP codes to support more efficient mail delivery.
+
+
+</p><p><b>Legislative Districts
+
+</b></p><p>AskCHIS NE provides data at both state (senate and assembly) and federal legislative districts. State legislative districts are the areas from which members are elected to the state legislature. In California, the upper state legislative district is the California Senate, and the lower district is the California Assembly. At the federal level, the application provides estimates for California based on the 113th U.S. Congressional districts.
+
+</p><p><b>Legislative Lookup
+
+</b></p><p>Determining your legislative district can sometimes be difficult as all three district types (senate, assembly, and congressional) have boundaries that cross cities and ZIP codes. AskCHIS NE provides a legislative lookup tool to quickly and easily determine legislative districts. To use this feature, enter a full address, including ZIP code (5 or 9-digit). Note: if you simply enter a ZIP code or city, the tool will not yield any results.
+
+
+</p><p><b>Combining Locations
+
+</b></p><p>AskCHIS NE provides users the ability to combine same-type geographic entities into larger geographic areas. This feature is particularly useful when searching for health estimates in geographic areas where the population is below 1,000 or estimates are statistically unstable. When combining geographies, the system automatically recalculates the point estimate, 95% confidence interval, as well as the total population universe. The map also updates to show one continuous geographic entity. Note: users can also combine non-contiguous same-type geographic entities.
+</p></div>
+<div id="tabs-7" class="help">
+<div class="biggie"><p><b>Frequently Asked Questions</b></p></div>
+ 
+<p><b>Which cycle of CHIS does AskCHIS Neighborhood Edition provide estimates for?
+
+</b></p><p>All health estimates in this version of AskCHIS Neighborhood Edition are based on data from the 2011-2012, 2013-2014 and 2015-2016 California Health Interview Survey. Socio-demographic indicators come from the 2008-2012 and 2010-2014 American Community Survey (ACS) 5-year summary tables.
+
+
+</p><p><b>What are model-based small area estimates?
+
+</b></p><p>Model-based small area estimates (SAEs) are the result of statistical modeling that uses relevant characteristics of populations and geographical areas to predict health conditions for small geographic units (cities, zip codes, legislative districts, and some counties). SAEs are not direct estimates (estimates produced directly from survey data, such as those provided through AskCHIS). While direct estimates are produced solely using survey data and design weights, the model-based estimates in AskCHIS NE also rely on secondary data describing characteristics of both geographic regions and populations.
+
+
+</p><p><b>What is a point estimate / 95% Confidence Interval?
+
+</b></p><p>Results in AskCHIS NE are statistical estimates. The point estimate is a single number that summarizes the sample, such as 8.4% of adults in California were diagnosed with diabetes. Because the estimated value is based on CHIS sample and statistical models, it has a degree of uncertainty, and the confidence interval (C.I.) shows the range where the actual value may lie. A 95% C.I. means that if we were to repeat our CHIS sample and modelling approach for a large number of times, then 95% of the time, the ACTUAL value will lie between the lower and upper C.I. range.
+
+
+</p><p><b>What is a ZCTA and how is it different from a ZIP code?
+
+</b></p><p>5-Digit ZIP Code Tabulation Areas (ZCTAs) are approximate representations of U.S. Postal Service 5-digit service areas. The Census Bureau defines ZCTAs by allocating each Census block that contains addresses to a single ZIP Code Tabulation Area, usually to the ZCTA that reflects the most frequently occuring ZIP code for the addresses within that tabulation block. For more information, please visit our GIS Information page and information available from the Census Bureau.
+
+
+</p><p><b>I can't find my legislative district. What am I doing wrong?
+
+</b></p><p>Legislative districts (Assembly, Senate, U.S. Congressional) boundaries cross zip codes, cities, and county boundaries. For this reason, our legislative lookup tool requires that users enter either their full address (ie. 10960 Wilshire Blvd, Los Angeles, CA 90024) or their full 9-digit ZIP code (ie, 90024-1234). If you have entered your full address and are not getting any results, please contact us at <a href="mailto:askchis@ucla.edu?subject=AskCHIS NE feedback" class="email">askchis@ucla.edu</a>.
+
+
+</p><p><b>Why isn't there data available for all ZIP codes / cities in California?
+
+</b></p><p>While AskCHIS NE has data on all ZCTAs and cities in California, two factors may influence our ability to display the estimates:
+
+<ol><li>A small population (under 1,000): currently, the application only shows estimates for geographic entities with populations above 1,000. If your ZCTA/city has a population below this threshold, the easiest way to obtain data is to combine it with a neighboring ZCTA / city and obtain a pooled estimate.
+</li><li>A high coefficient of variation: high coefficients of variation denote statistical instability.
+
+</li></ol></p><p><b>Why do your population estimates differ from other sources like ACS?
+
+</b></p><p>The population estimates in AskCHIS NE represent the CHIS 2011-2012, 2013-2014, 2015-2016, 2017-2018 and 2019-2020 population sample, which excludes Californians living in group quarters (such as prisons, nursing homes, and dormitories). The population estimates are generated based on Nielsen-Claritas Popfacts (demographic projection), non-group quarter proportions from Census 2010 at the Census tract level, and CHIS control totals (based on the California Department of Finance). CHIS uses a weighting methodology that forces CHIS estimates to be consistent with official population estimates at county-level from California Department of Finance. These benchmark population estimates are called population control totals. Further information on the CHIS control totals is available in the CHIS 2011-2012, 2013-2014 and 2015-2016 Methods Report #5. Due to differences in the target population as well as in data sources for control totals, our population estimates may differ from other sources.
+
+</p><p><b>What is a population universe? How does that apply to health estimates in AskCHIS NE?
+
+</b></p><p>A population universe is the population for which the health estimate is defined, for example, the population universe for Flu Vaccine among children ages 6m-11 years is the total number of children ages 6m-11 within each individual location. For each health indicator in AskCHIS NE, the point estimate represents the proportion of the population with the condition among the specified population universe. The population universe is the denominator, whereas people with the condition is the numerator.
+
+
+</p><p><b>How do I request access to this data? How do I request more data?
+
+</b></p><p>The application allows users to export the data behind the table with a limit of 5 total geographic areas. This limitation is mainly due to screen space constraints related to data display. If you'd like access to more of the data that backs AskCHIS NE, please contact our Data Access Center at dacchpr@ucla.edu.
+
+
+</p><p><b>I didn't find a health estimate for a specific topic/indicator. Are there more health topics on the way?
+
+</b></p><p>While the initial breadth of health estimates is comprised of 15-20 health indicators, we look forward to working with the public health community to support adding more indicators to AskCHIS NE. If your organization has a need for a specific health indicator, please contact us at askchis@ucla.edu. You can also find data on other CHIS indicators by using AskCHIS or the CHIS Public Use Files.
+</p></div>
+<a href="#ex3" rel="modal:open" id="modalOpn3">Open Modal</a></p>
+</div>
+<div id="ex2" class="modal">
+<body>
+<div id="info">
+<div style="text-align:center" class="biggie"><b>Click on a geography name in the table below to copy the name to your clipboard to paste in the geography name search.</b></div>
+<table style="width:100%">
+	<tr>
+		<th>Year</th>
+		<th>Census Tract Name</th>
+		<th>Congressional District</th>
+		<th>State Assembly District</th>
+		<th>State Senate District</th>
+	</tr>
+	<tr>
+		<td>2012-2020</td>
+		<td><span id="tract17" class="copy" onclick="copyToClipboard('tract17')"></span></td>
+		<td><span id="cong17" class="copy" onclick="copyToClipboard('cong17')"></span></td>
+		<td><span id="sldl17"  class="copy" onclick="copyToClipboard('sldl17')"></span></td>
+		<td><span id="sldu17"   class="copy" onclick="copyToClipboard('sldu17')"></span></td>
+	</tr>
+	<tr>
+		<td>2022</td>
+		<td><span id="tract22" class="copy" onclick="copyToClipboard('tract22')"></span></td>
+		<td><span id="cong22" class="copy" onclick="copyToClipboard('cong22')"></span><br><span class="legisName" id="congName"></span></td>
+		<td><span id="sldl22" class="copy" onclick="copyToClipboard('sldl22')"></span><br><span class="legisName" id="sldlName"></span></td>
+		<td><span id="sldu22" class="copy" onclick="copyToClipboard('sldu22')"></span><br><span class="legisName" id="slduName"></span></td>
+	</tr>
+</table>
+<div id="copyMessage">Copied to clipboard!</div>
+	<br><br><span id="filter"></span>
+	</div>
+	<form>
+	Address to Lookup: <input type="text" name="address" id="address"><br>
+	<input type="button" id="sub" value="Submit">
+	</form>
+	<br>
+	<p><a href="#ex2" rel="modal:open" id="modalOpn2">Open Modal</a></p>
+</body>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function(){	
+	/*$(initializeViz);
+	$("#mapViz").hide().delay(2000);*/
+
+	$( function() {
+		$(".copy").tooltip();
+		$("#tabs").tabs();
+		$("#tabs-hlp").tabs();
+	});
+	
+	$(".copy").prop('title', 'Click to copy this geography name to the clipboard.');
+
+	function switchToTable(){
+		workbook.activateSheetAsync("DataTable");
+	}
+	function switchToMap(){
+		workbook.activateSheetAsync("Map");
+	}
+	
+	async function firstInteractive (e){
+		console.log("firstInteractive")
+	}
+	
+	$("#btn-tbl").on("click", function(){
+		//$("#btn-map").toggle();
+		var sheet = "DataTable";
+		$("#btn-filter").show();
+		$("#btn-filter2").show();
+		//$("#btn-tbl").toggle();
+		$("#mapViz").show();
+		//$(".grp").toggle();
+		$(initializeTable);
+		$(switchToTable);
+		$("#intro").hide();
+		$("#addressLookUp").show();
+		
+	});
+	$("#btn-map").on("click", function(){
+		//$("#btn-map").toggle();
+		//$("#mapViz").toggle();
+		//$("#btn-filter").toggle();
+		//$("#btn-tbl").toggle();
+		//$("#btn-filter2").toggle();
+		//$(".grp").toggle();
+		var sheet="Map";
+		$("#mapViz").show();
+		$("#btn-filter").hide();
+		$("#btn-filter2").hide();
+		$(initializeMap);
+		$(switchToMap);
+		$("#intro").hide();
+		$("#addressLookUp").show();
+	});
+	$("#home").on("click", function(){
+		$("#mapViz").hide();
+		$("#btn-filter").hide();
+		$("#btn-filter2").hide();
+		$("#intro").show();
+		$("#addressLookUp").hide();
+	});
+	$("#btn-filter").on("click", function(){
+		$("#modalOpn").trigger('click');
+	});
+	$("#addressLookUp").on("click", function(){
+		$("#modalOpn2").trigger('click');
+	});
+	$("#help").on("click", function(){
+		$("#modalOpn3").trigger('click');
+	});
+	
+	$("#btn-filter2").on("click", function(){
+		var sheet = viz.getWorkbook().getActiveSheet();
+		sheet.applyFilterAsync("Name", "California", tableau.FilterUpdateType.REPLACE);
+	});
+	
+	$(".close-modal").click (function(){
+		$("#info").toggle();
+	});
+	
+	
+	$("#sub").click(function(){
+		$("#info").show();
+		var add = $("#address").val(); //Get the address entered into the text box
+		var API_KEY = 'AIzaSyAvV8J0hrjiL01jdojNKPE-hhcAc_6Q8zA';
+		var url17 = 'http://geocoding.geo.census.gov/geocoder/geographies/onelineaddress?address=' + add +'&benchmark=Public_AR_Current&vintage=ACS2017_Current&layers_Census2020&layers=tract&format=json'; //Create the url needed to geocode the address from Census
+		var url22 = 'http://geocoding.geo.census.gov/geocoder/geographies/onelineaddress?address=' + add +'&benchmark=Public_AR_Current&vintage=ACS2022_Current&layers=tract&format=json';
+		var urlSLDU = 'https://civicinfo.googleapis.com/civicinfo/v2/representatives?address=' + add +'&includeOffices=true&levels=administrativeArea1&roles=legislatorUpperBody&key='+API_KEY;
+		var urlSLDL = 'https://civicinfo.googleapis.com/civicinfo/v2/representatives?address=' + add +'&includeOffices=true&levels=administrativeArea1&roles=legislatorLowerBody&key='+API_KEY;
+		var urlCONG = 'https://civicinfo.googleapis.com/civicinfo/v2/representatives?address=' + add +'&includeOffices=true&levels=country&roles=legislatorLowerBody&key='+API_KEY;
+
+		$.ajax({
+			url: url17,
+			dataType: 'jsonp',
+			success: function(response) {
+				console.log(response.result.addressMatches[0].geographies); //This will allow you to view all the results that you get for the address geocoder
+				var tract17 = (response.result.addressMatches[0].geographies['Census Tracts'][0]['NAME']); //Remove the word Census from the tract name to match the AskCHIS Census Tract naming convention
+				var cong17 = (response.result.addressMatches[0].geographies['115th Congressional Districts'][0]['NAME']);
+				var sldl17 = (response.result.addressMatches[0].geographies['2016 State Legislative Districts - Lower'][0]['NAME']);
+				var sldu17 = (response.result.addressMatches[0].geographies['2016 State Legislative Districts - Upper'][0]['NAME']);
+				var county = (response.result.addressMatches[0].geographies['Counties'][0]['NAME']);
+				var state = (response.result.addressMatches[0].geographies['States'][0]['NAME']);
+				var geoid17 = (response.result.addressMatches[0].geographies['Census Tracts'][0]['GEOID']).substr(1); //Remove the first value from the GEOID to match the AskCHIS GEOID
+				
+				if(state == "California"){
+					var tractName17 = tract17  + ', ' + county + ', California'; //Only display the tract name if the address is geocoded to California
+					$("#geoid17").text(geoid17); //Only display the GEOID if the address is geocoded to California
+				}else{
+					var tractName17 = "Only use a California address."
+					$("#geoid17").text('Only use a California address.');
+				}
+				console.log(tractName17);
+				$("#tract17").text(tractName17);
+				$("#name17").show();
+				$("#cong17").text(cong17);
+				$("#sldl17").text(sldl17);
+				$("#sldu17").text(sldu17);
+			},
+			error: function(error) {
+				console.log(error);
+				$("span").text('Unable to find a Census Tract from the address provided.');
+				$("#name17").show();
+			}
+		});
+		$.ajax({
+			url: url22,
+			dataType: 'jsonp',
+			success: function(response) {
+				console.log(response.result.addressMatches[0].geographies); //This will allow you to view all the results that you get for the address geocoder
+				var tract22 = (response.result.addressMatches[0].geographies['Census Tracts'][0]['NAME']); //Remove the word Census from the tract name to match the AskCHIS Census Tract naming convention
+				var cong22 = (response.result.addressMatches[0].geographies['118th Congressional Districts'][0]['NAME']);
+				var sldl22 = (response.result.addressMatches[0].geographies['2022 State Legislative Districts - Lower'][0]['NAME']);
+				var sldu22 = (response.result.addressMatches[0].geographies['2022 State Legislative Districts - Upper'][0]['NAME']);
+				var county = (response.result.addressMatches[0].geographies['Counties'][0]['NAME']);
+				var state = (response.result.addressMatches[0].geographies['States'][0]['NAME']);
+				var geoid22 = (response.result.addressMatches[0].geographies['Census Tracts'][0]['GEOID']).substr(1); //Remove the first value from the GEOID to match the AskCHIS GEOID
+				
+				if(state == "California"){
+					var tractName22 = tract22 + ', ' + county + ', California'; //Only display the tract name if the address is geocoded to California
+					$("#geoid22").text(geoid22); //Only display the GEOID if the address is geocoded to California
+				}else{
+					var tractName22 = "Only use a California address."
+					$("#geoid22").text('Only use a California address.');
+				}
+				console.log(tractName22);
+				$("#tract22").text(tractName22);
+				$("#name22").show();
+				$("#cong22").text(cong22);
+				$("#sldl22").text(sldl22);
+				$("#sldu22").text(sldu22);
+			},
+			error: function(error) {
+				console.log(error);
+				$("span").text('Unable to find a Census Tract from the address provided.');
+				$("#name22").show();
+			}
+		});
+		
+		$.ajax({
+			url: urlSLDU,
+			dataType: 'jsonp',
+			success: function(response){
+				console.log(response);
+				var slduName = (response.officials[0].name);
+				var slduParty = (response.officials[0].party);
+				console.log(slduName);
+				$("#slduName").text(slduName + ' (' + slduParty + ')');
+			}
+		});
+		
+		$.ajax({
+			url: urlSLDL,
+			dataType: 'jsonp',
+			success: function(response){
+				console.log(response);
+				var sldlName = (response.officials[0].name);
+				var sldlParty = (response.officials[0].party);
+				console.log(sldlName);
+				$("#sldlName").text(sldlName + ' (' + sldlParty + ')');
+			}
+		});
+		
+		$.ajax({
+			url: urlCONG,
+			dataType: 'jsonp',
+			success: function(response){
+				console.log(response);
+				var congName = (response.officials[0].name);
+				var congParty = (response.officials[0].party);
+				console.log(congName);
+				$("#congName").text(congName + ' (' + congParty + ')');
+			}
+		});
+		
+		const vizer = document.getElementById('tableauVizMapPicker');
+		console.log(vizer);
+		let sheet=vizer.workbook.activeSheet;
+		function selectTract(){
+			sheet.selectMarksByValueAsync("Geoid", geoid17, SelectionUpdateType.replace);
+		}
+			
+	});
+});
+</script>
+
+</html>
