@@ -16,7 +16,6 @@
 	<link href="https://db.onlinewebfonts.com/c/47751054963dad4aa2c6fd1b7372567f?family=News+Cycle" rel="stylesheet">
 	<style>
 		#btn-filter{display: none;}
-		#btn-filter2{display: none;}
 		#info{display: none;}
 		#modalOpn{display:none;}
 		#modalOpn2{display:none;}
@@ -177,7 +176,6 @@
 		</ul>
 	<button type="button" id="btn-filter">Filter Table with Map</button>
 	<button type="button" id="addressLookUp">Address Lookup</button>
-	<button type="button" id="btn-filter2">Clear Geography Filter</button>
 	<div id="intro">
 	<p>Welcome to the updated AskCHIS Neighborhood Edition (AskCHIS NE)!</p>
 	<p>In this version of AskCHIS NE you will find similar features as the old platform and some new additions.</p>
@@ -453,8 +451,7 @@ $(document).ready(function(){
 	$("#btn-tbl").on("click", function(){
 		//$("#btn-map").toggle();
 		var sheet = "DataTable";
-		$("#btn-filter").show();
-		$("#btn-filter2").show();
+		//$("#btn-filter").show();
 		//$("#btn-tbl").toggle();
 		$("#mapViz").show();
 		//$(".grp").toggle();
@@ -473,8 +470,7 @@ $(document).ready(function(){
 		//$(".grp").toggle();
 		var sheet="Map";
 		$("#mapViz").show();
-		$("#btn-filter").hide();
-		$("#btn-filter2").hide();
+		//$("#btn-filter").hide();
 		$(initializeMap);
 		$(switchToMap);
 		$("#intro").hide();
@@ -482,8 +478,7 @@ $(document).ready(function(){
 	});
 	$("#home").on("click", function(){
 		$("#mapViz").hide();
-		$("#btn-filter").hide();
-		$("#btn-filter2").hide();
+		//$("#btn-filter").hide();
 		$("#intro").show();
 		$("#addressLookUp").hide();
 	});
@@ -495,11 +490,6 @@ $(document).ready(function(){
 	});
 	$("#help").on("click", function(){
 		$("#modalOpn3").trigger('click');
-	});
-	
-	$("#btn-filter2").on("click", function(){
-		var sheet = viz.getWorkbook().getActiveSheet();
-		sheet.applyFilterAsync("Name", "California", tableau.FilterUpdateType.REPLACE);
 	});
 	
 	$(".close-modal").click (function(){
