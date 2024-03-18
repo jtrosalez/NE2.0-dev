@@ -196,12 +196,12 @@ $(document).ready(function(){
 			}
 		});
 		
-		const vizer = document.getElementById('tableauVizMapPicker');
+		/*const vizer = document.getElementById('tableauVizMapPicker');
 		console.log(vizer);
 		let sheet=vizer.workbook.activeSheet;
 		function selectTract(){
 			sheet.selectMarksByValueAsync("Geoid", geoid17, SelectionUpdateType.replace);
-		}
+		}*/
 			
 	});
 });
