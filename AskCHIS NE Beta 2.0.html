@@ -692,13 +692,6 @@ $(document).ready(function(){
 				$("#congName").text(congName + ' (' + congParty + ')');
 			}
 		});
-		
-		const vizer = document.getElementById('tableauVizMapPicker');
-		console.log(vizer);
-		let sheet=vizer.workbook.activeSheet;
-		function selectTract(){
-			sheet.selectMarksByValueAsync("Geoid", geoid17, SelectionUpdateType.replace);
-		}
 			
 	});
 });
