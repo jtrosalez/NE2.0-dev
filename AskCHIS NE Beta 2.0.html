@@ -584,8 +584,8 @@ $(document).ready(function(){
 		$("#info").show();
 		var add = $("#address").val(); //Get the address entered into the text box
 		var API_KEY = 'AIzaSyAvV8J0hrjiL01jdojNKPE-hhcAc_6Q8zA';
-		var url17 = 'http://geocoding.geo.census.gov/geocoder/geographies/onelineaddress?address=' + add +'&benchmark=Public_AR_Current&vintage=ACS2017_Current&layers_Census2020&layers=tract&format=json'; //Create the url needed to geocode the address from Census
-		var url22 = 'http://geocoding.geo.census.gov/geocoder/geographies/onelineaddress?address=' + add +'&benchmark=Public_AR_Current&vintage=ACS2022_Current&layers=tract&format=json';
+		var url17 = 'https://geocoding.geo.census.gov/geocoder/geographies/onelineaddress?address=' + add +'&benchmark=Public_AR_Current&vintage=ACS2017_Current&layers_Census2020&layers=tract&format=json'; //Create the url needed to geocode the address from Census
+		var url22 = 'https://geocoding.geo.census.gov/geocoder/geographies/onelineaddress?address=' + add +'&benchmark=Public_AR_Current&vintage=ACS2022_Current&layers=tract&format=json';
 		var urlSLDU = 'https://civicinfo.googleapis.com/civicinfo/v2/representatives?address=' + add +'&includeOffices=true&levels=administrativeArea1&roles=legislatorUpperBody&key='+API_KEY;
 		var urlSLDL = 'https://civicinfo.googleapis.com/civicinfo/v2/representatives?address=' + add +'&includeOffices=true&levels=administrativeArea1&roles=legislatorLowerBody&key='+API_KEY;
 		var urlCONG = 'https://civicinfo.googleapis.com/civicinfo/v2/representatives?address=' + add +'&includeOffices=true&levels=country&roles=legislatorLowerBody&key='+API_KEY;
