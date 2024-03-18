@@ -16,10 +16,14 @@
 	<link href="https://db.onlinewebfonts.com/c/47751054963dad4aa2c6fd1b7372567f?family=News+Cycle" rel="stylesheet">
 	<style>
 		#btn-filter{display: none;}
+		#mapHelp{display: none;}
+		#tableHelp{display:none;}
 		#info{display: none;}
 		#modalOpn{display:none;}
 		#modalOpn2{display:none;}
 		#modalOpn3{display: none;}
+		#modalOpn4{display: none;}
+		#modalOpn5{display: none;}
 		.modal {max-width: 1500px !important;}
 		#toolbar-container{display: none !important;}
 		table, th, td {
@@ -45,6 +49,11 @@
 		.biggie{font-size: larger ! important;}
 		.email{color: blue ! important;}
 		#mapPicker{text-align: center; margin: auto; width: 60%;}
+		#title{text-align: center ! important; font-weight:bold; font-size: xx-large;}
+		#img1{max-width: 15%; vertical-align: middle;}
+		#img2{max-width: 25%; vertical-align: middle;}
+		#intro{max-width: 50%;}
+
 	</style>
 	
    <script type="text/javascript">
@@ -168,6 +177,7 @@
 </head>
 
 <body>
+	<p><img id="img1" src="https://askchisne.ucla.edu/ask/_layouts/ne/images/askchisne.png"></img><img id="img2" src="https://healthpolicy.ucla.edu/sites/default/files/styles/hero_block/public/2023-09/bxd_blk_healthpolicyresearch_b.png.webp?itok=z4alqvrp"></img></p>
 	<div id="tabs">
 		<ul>
 			<li><a href=".tabs-1" id="home">Home</a></li>
@@ -175,19 +185,14 @@
 			<li><a href=".tabs-3" id="btn-tbl">Create Table</a></li>
 		</ul>
 	<button type="button" id="btn-filter">Filter Table with Map</button>
+	<button type="button" id="mapHelp">How to...</button>
+	<button type="button" id="tableHelp">How to...</button>
 	<button type="button" id="addressLookUp">Address Lookup</button>
 	<div id="intro">
-	<p>Welcome to the updated AskCHIS Neighborhood Edition (AskCHIS NE)!</p>
-	<p>In this version of AskCHIS NE you will find similar features as the old platform and some new additions.</p>
-	<p><b>Create a Map</b>
-	<br>
-	Click on the "Create a Map" tab above to view a map display of modeled CHIS estimates as well as Sociodemographic and other health indice data.
-	</p>
-	<p><b>Create a Table</b>
-	<br>
-	Click on the "Create a Table" tab avove to create a table display of the data and to download estimates for the different geographies you select.
-	</p>
-	<button type="button" id="help">Help</button>
+	<button type="button" id="help">Learn about our methodology</button>
+	<p><b><i>AskCHIS Neighborhood Edition</i></b> is an online data dissemination and visualization platform that provides health estimates at sub-county geographic regions. With AskCHIS NE, you can access and visualize authoritative health data at <b>census tract, ZIP code, city, county, and legislative district levels.</b></p>
+	<p>Health estimates are powered by data from the California Health Interview Survey (CHIS) and are created through a sophisticated modeling technique called small area estimation (SAE). For more information about the methodology behind our data, click here.</p>
+	<img src="https://raw.githubusercontent.com/jtrosalez/NE2.0/main/image/mapIMG1.png" style="width:85%"></img>
 	</div>
 	<div id="mapViz">
     <div id="tableauViz" style="width:800px; height:700px;"></div>
@@ -201,10 +206,77 @@
 	</div>
 </body>
 </div>
+<div id="ex4" class="modal">
+<div id="map-hlp">
+		<ul>
+			<li><a href="#tabs-8" id="map-hlp1">Use dropdowns to select features on map</a></li>
+			<li><a href="#tabs-9" id="map-hlp2">Select a geography</a></li>
+			<li><a href="#tabs-10" id="map-hlp3">Hover over a geography to view estimate</a></li>
+			<li><a href="#tabs-11" id="map-hlp4">Address lookup</a></li>
+			<li><a href="#tabs-12" id="map-hlp5">Map Search Option</a></li>
+			<li><a href="#tabs-13" id="map-hlp6">Grouping Geographies</a></li>
+		</ul>
+	<div id="tabs-8" class="help">
+		Use the drop down options to the right of the map to select features on the map (geography type, indicator type and specific indicators).
+		<img src="https://raw.githubusercontent.com/jtrosalez/NE2.0/main/image/mapHelp1.png"></img>
+	</div>
+	<div id="tabs-9" class="help">
+		Select on a geography in the map to compare it's estimate to the statewide estimate on the tables to the right of the map.
+		<img src="https://raw.githubusercontent.com/jtrosalez/NE2.0/main/image/mapHelp2.png"></img>
+	</div>
+	<div id="tabs-10" class="help">
+		Hover over a geography to view it's estimate and other sociodemographic information.
+		<img src="https://raw.githubusercontent.com/jtrosalez/NE2.0/main/image/mapHelp3.png"></img>
+	</div>
+	<div id="tabs-11" class="help">
+		Search an address and find the Census Tract and the legislative districts that it is part of.
+		<img src="https://raw.githubusercontent.com/jtrosalez/NE2.0/main/image/mapHelp4.png" style="width: 95%"></img>
+		<br>...and paste the geography name from your clipboard to the "Search Geography Name" search box to zoom to your geography.
+		<br>
+		<img src="https://raw.githubusercontent.com/jtrosalez/NE2.0/main/image/mapHelp4.1.png"></img>
+	</div>
+	<div id="tabs-12" class="help">
+		Use the search feature in the map to zoom to a county, city or neighbrhood on the map.
+		<img src="https://raw.githubusercontent.com/jtrosalez/NE2.0/main/image/mapHelp5.png"></img>
+	</div>
+	<div id="tabs-13" class="help">
+		Using ctrl and selecting on multiple geographies will allow you to create estimates of the grouping you select on the right hand table.
+		<img src="https://raw.githubusercontent.com/jtrosalez/NE2.0/main/image/mapHelp6.png"></img>
+		<p>You can also use the map options to use a rectangle tool, radial tool or lasso tool to select your geographies</p>
+		<img src="https://raw.githubusercontent.com/jtrosalez/NE2.0/main/image/mapHelp7.png"></img>
+	</div>
+	<a href="#ex4" rel="modal:open" id="modalOpn4">Open Modal</a>
+</div>
+<div id="ex5" class="modal">
+<div id="table-hlp">
+		<ul>
+			<li><a href="#tabs-14" id="table-hlp1">Add indicators to your table</a></li>
+			<li><a href="#tabs-15" id="table-hlp2">Add geographies to your table</a></li>
+			<li><a href="#tabs-16" id="table-hlp3">Add grouped geographies to your table</a></li>
+			<li><a href="#tabs-17" id="table-hlp4">Export your data table</a></li>
+		</ul>
+	<div id="tabs-14" class="help">
+		Use the "Select an Indicator" dropdown to add indicators to your data table.
+		<img src="https://raw.githubusercontent.com/jtrosalez/NE2.0/main/image/tableHelp1.png"></img>
+	</div>
+	<div id="tabs-15" class="help">
+		Use the "Select Geography" dropdown to add geographies to your data table.
+		<br><i>*Please note you are limited to 5 geographies in the data table.</i>
+		<img src="https://raw.githubusercontent.com/jtrosalez/NE2.0/main/image/tableHelp2.png"></img>
+	</div>
+	<div id="tabs-16" class="help">
+		Any grouped geographies that you create on your map feature will be added to a table below and all indicators you select from the dropdown on this page will be included in that table.
+		<img src="https://raw.githubusercontent.com/jtrosalez/NE2.0/main/image/tableHelp4.png"></img>
+	</div>
+	<div id="tabs-17" class="help">
+		Select the "Export Data" button to export your data tables to an excel file.
+		<img src="https://raw.githubusercontent.com/jtrosalez/NE2.0/main/image/tableHelp3.png"></img>
+	</div>
+	<a href="#ex5" rel="modal:open" id="modalOpn5">Open Modal</a>
+</div>
 <div id="ex3" class="modal">
 <div id="tabs-hlp">
 		<ul>
-			<li><a href="#tabs-1" id="tab-hlp1">How to...</a></li>
 			<li><a href="#tabs-2" id="btn-hlp2">General Information</a></li>
 			<li><a href="#tabs-3" id="btn-hlp3">Indicator Information</a></li>
 			<li><a href="#tabs-4" id="btn-hlp4">Data Limitations and Use</a></li>
@@ -213,9 +285,6 @@
 			<li><a href="#tabs-7" id="btn-hlp7">FAQs</a></li>
 		</ul>
 		
-<div id="tabs-1" class="help">
-<div class="biggie"><b>PLACEHOLDER FOR HOW TO....</b></div>
-</div>
 <div id="tabs-2" class="help">
 <div class="biggie"><b>General Application & Data Information</b></div>
  
@@ -433,6 +502,8 @@ $(document).ready(function(){
 		$(".copy").tooltip();
 		$("#tabs").tabs();
 		$("#tabs-hlp").tabs();
+		$("#map-hlp").tabs();
+		$("#table-hlp").tabs();
 	});
 	
 	$(".copy").prop('title', 'Click to copy this geography name to the clipboard.');
@@ -458,6 +529,8 @@ $(document).ready(function(){
 		$(initializeTable);
 		$(switchToTable);
 		$("#intro").hide();
+		$("#mapHelp").hide();
+		$("#tableHelp").show();
 		$("#addressLookUp").show();
 		
 	});
@@ -474,6 +547,8 @@ $(document).ready(function(){
 		$(initializeMap);
 		$(switchToMap);
 		$("#intro").hide();
+		$("#mapHelp").show();
+		$("#tableHelp").hide();
 		$("#addressLookUp").show();
 	});
 	$("#home").on("click", function(){
@@ -481,6 +556,8 @@ $(document).ready(function(){
 		//$("#btn-filter").hide();
 		$("#intro").show();
 		$("#addressLookUp").hide();
+		$("#mapHelp").hide();
+		$("#tableHelp").hide();
 	});
 	$("#btn-filter").on("click", function(){
 		$("#modalOpn").trigger('click');
@@ -491,7 +568,12 @@ $(document).ready(function(){
 	$("#help").on("click", function(){
 		$("#modalOpn3").trigger('click');
 	});
-	
+	$("#mapHelp").on("click", function(){
+		$("#modalOpn4").trigger('click');
+	});
+	$("#tableHelp").on("click", function(){
+		$("#modalOpn5").trigger('click');
+	});
 	$(".close-modal").click (function(){
 		$("#info").toggle();
 	});
