@@ -496,6 +496,12 @@ Contextual data: American Community Survey (ACS). Publicly available ACS 2012-20
 
 <script type="text/javascript">
 $(document).ready(function(){	
+	$(document).keypress(
+  		function(event){
+    			if (event.which == '13') {
+      			event.preventDefault();
+    		}
+	});
 	/*$(initializeViz);
 	$("#mapViz").hide().delay(2000);*/
 
