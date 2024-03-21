@@ -1,3 +1,4 @@
+$(document).ready(function(){
 function initializeMap() {
 			var placeholderDiv = document.getElementById("tableauViz");
 			var url = "https://public.tableau.com/views/NETester_v1_1_1/Map";
@@ -111,3 +112,4 @@ function initializeMap() {
 			sheet.applyFilterAsync("Name", name, tableau.FilterUpdateType.ADD);
 			
         }
+});
