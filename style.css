@@ -1,0 +1,45 @@
+		#btn-filter{display: none;}
+		#mapHelp{display: none;}
+		#tableHelp{display:none;}
+		#info{display: none;}
+		#modalOpn{display:none;}
+		#modalOpn2{display:none;}
+		#modalOpn3{display: none;}
+		#modalOpn4{display: none;}
+		#modalOpn5{display: none;}
+		.modal {max-width: 1500px !important;}
+		#toolbar-container{display: none !important;}
+		table, th, td {
+			border:1px solid black;
+			border-collapse: collapse;
+		}
+		form {font-family: "News Cycle";}
+		button {font-family: "News Cycle" ! important; font-size: small ! important;}
+		#sub {font-family: "News Cycle" ! important;}
+		input {font-family: "News Cycle" ! important;}
+		#intro{font-family: "News Cycle" ! important; font-weight: normal ! important; font-size: normal ! important;}
+		input[type=text]{width:100%;}
+		#info {font-family: "News Cycle" ! important;}
+		#addressLookUp{display: none;}
+		.legisName{font-size: small;}
+		.copy{cursor: pointer}
+		.ui-tooltip-content{font-family: "News Cycle" ! important; font-size: small ! important;}
+		#copyMessage{display: none; text-align: center;}
+		.ui-tabs{border: none ! important; font-family: "News Cycle" ! important; font-weight: bold ! important; font-size: large ! important;}
+		.modal{font-family: "News Cycle" ! important;}
+		.help{font-weight: normal;}
+		.error{color: red ! important;}
+		.biggie{font-size: larger ! important;}
+		.email{color: blue ! important;}
+		#mapPicker{text-align: center; margin: auto; width: 60%;}
+		#title{text-align: center ! important; font-weight:bold; font-size: xx-large;}
+		#img1{width: 35%; display:block; margin-left: auto; margin-right: auto;}
+		#intro{max-width: 75%;}
+		.img{border: solid; border-width: .5px;}
+		.column {float: left; width: 99%; padding: 5px;}
+		.imgLand{width: 100%;}
+		.container{display: flex;}
+		.imgTxt{font-size: small; font-weight: bold;}
+		#header{display:flex; background-color: rgb(255,199, 44);}
+		.ui-widget-header {background:rgb(0, 85, 135) ! important;}
+		.ui-tabs-active{background: rgb(0,59,92) ! important; border: none ! important;}
