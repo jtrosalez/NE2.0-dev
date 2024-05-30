@@ -40,10 +40,10 @@ function initializeMap() {
 					workbook = viz.getWorkbook();
 					activeSheet = workbook.getActiveSheet();
 					//listenToMarksSelection();
+					$("#toolbar-container").hide();
 				}
 			};
 			viz = new tableau.Viz(placeholderDiv, url, options);
-			$("#toolbar-container").hide();
 		}    
 
 		function initializeTable() {
@@ -58,10 +58,10 @@ function initializeMap() {
 					workbook = viz.getWorkbook();
 					activeSheet = workbook.getActiveSheet();
 					//listenToMarksSelection();
+					$("#toolbar-container").hide();
 				}
 			};
 			viz = new tableau.Viz(placeholderDiv, url, options);
-			$("#toolbar-container").hide();
 		}    		
 		
 
