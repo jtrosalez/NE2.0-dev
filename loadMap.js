@@ -40,7 +40,7 @@ function initializeMap() {
 					workbook = viz.getWorkbook();
 					activeSheet = workbook.getActiveSheet();
 					//listenToMarksSelection();
-					$("#toolbar-container").hide();
+					$("#viz-viewer-toolbar").hide();
 					console.log("loadedMap");
 				}
 			};
@@ -59,7 +59,7 @@ function initializeMap() {
 					workbook = viz.getWorkbook();
 					activeSheet = workbook.getActiveSheet();
 					//listenToMarksSelection();
-					$("#toolbar-container").hide();
+					$("#viz-viewer-toolbar").hide();
 					console.log("loadedTable");
 				}
 			};
