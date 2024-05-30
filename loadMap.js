@@ -18,7 +18,7 @@ function copyToClipboard(elementId) {
 		// Remove it from the body
 		document.body.removeChild(aux);
 		
-		$("#copyMessage").show().delay(1000).toggle("fade");
+		$(this).html("Copied");
 
 	}
 
