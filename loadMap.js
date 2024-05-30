@@ -22,7 +22,7 @@ function copyToClipboard(elementId) {
 
 $(document).ready(function(){
 $(".copy-btn").on('click', function(evt){
-	$('.copied).html("Copy");
+	$('.copied').html("Copy");
 	$('.copied').removeClass('copied');
 	$(this).html("Copied");
 	$(this).addClass("copied");
