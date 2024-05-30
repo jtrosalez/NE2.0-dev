@@ -21,7 +21,7 @@ function copyToClipboard(elementId) {
 	}
 
 $(document).ready(function(){
-$(.copy-btn).on('click', function(evt){
+$(".copy-btn").on('click', function(evt){
 	$(this).html("Copied");
 	console.log("Coppied");
 });
