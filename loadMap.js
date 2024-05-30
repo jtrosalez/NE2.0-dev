@@ -41,7 +41,7 @@ function initializeMap() {
 					activeSheet = workbook.getActiveSheet();
 					//listenToMarksSelection();
 					$("#toolbar-container").hide();
-					console.log("loaded");
+					console.log("loadedMap");
 				}
 			};
 			viz = new tableau.Viz(placeholderDiv, url, options);
@@ -60,6 +60,7 @@ function initializeMap() {
 					activeSheet = workbook.getActiveSheet();
 					//listenToMarksSelection();
 					$("#toolbar-container").hide();
+					console.log("loadedTable");
 				}
 			};
 			viz = new tableau.Viz(placeholderDiv, url, options);
