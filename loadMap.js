@@ -43,6 +43,7 @@ function initializeMap() {
 				}
 			};
 			viz = new tableau.Viz(placeholderDiv, url, options);
+			$("#toolbar-container").hide();
 		}    
 
 		function initializeTable() {
@@ -60,6 +61,7 @@ function initializeMap() {
 				}
 			};
 			viz = new tableau.Viz(placeholderDiv, url, options);
+			$("#toolbar-container").hide();
 		}    		
 		
 
