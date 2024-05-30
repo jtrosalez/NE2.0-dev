@@ -24,7 +24,7 @@ $(document).ready(function(){
 $(.copy-btn).on('click', function(evt){
 	$(this).html("Copied");
 	console.log("Coppied");
-}
+});
 	
 function initializeMap() {
 			var placeholderDiv = document.getElementById("tableauViz");
