@@ -22,9 +22,9 @@ function copyToClipboard(elementId) {
 
 $(document).ready(function(){
 $(".copy-btn").on('click', function(evt){
+	$('.copied').removeClass('copied');
 	$(this).html("Copied");
 	$(this).addClass("copied");
-	console.log("Coppied");
 });
 	
 function initializeMap() {
