@@ -41,6 +41,7 @@ function initializeMap() {
 					activeSheet = workbook.getActiveSheet();
 					//listenToMarksSelection();
 					$("#toolbar-container").hide();
+					console.log("loaded");
 				}
 			};
 			viz = new tableau.Viz(placeholderDiv, url, options);
