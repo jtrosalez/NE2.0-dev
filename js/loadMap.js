@@ -10,7 +10,7 @@ function copyToClipboard(elementId) {
 		document.body.appendChild(aux);
 
 		// Highlight its content
-		aux.select();
+		aux.select();https://public.tableau.com/views/AskCHISNE2_0-dev/Map
 
 		// Copy the highlighted text
 		document.execCommand("copy");
@@ -30,7 +30,7 @@ $(".copy-btn").on('click', function(evt){
 	
 function initializeMap() {
 			var placeholderDiv = document.getElementById("tableauViz");
-			var url = "https://public.tableau.com/views/AskCHIS NE 2.0-dev/Map";
+			var url = "https://public.tableau.com/views/AskCHISNE2_0-dev/Map";
 			var options = {
 				//width: placeholderDiv.offsetWidth,
 				//height: placeholderDiv.offsetHeight,
@@ -49,7 +49,7 @@ function initializeMap() {
 
 		function initializeTable() {
 			var placeholderDiv = document.getElementById("tableauViz");
-			var url = "https://public.tableau.com/views/AskCHIS NE 2.0-dev/DataTable";
+			var url = "https://public.tableau.com/views/AskCHISNE2_0-dev/DataTable";
 			var options = {
 				//width: placeholderDiv.offsetWidth,
 				//height: placeholderDiv.offsetHeight,
