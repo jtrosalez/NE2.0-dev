@@ -20,22 +20,6 @@ function copyToClipboard(elementId) {
 
 	}
 
-// assume only one video is playing at a time
-var videoPlaying = null;
-
-const onPlay = function() {
-  if (videoPlaying && videoPlaying != this) {
-    videoPlaying.pause()
-  }
-  videoPlaying = this
-}
-
-// init event handler
-const videos = document.getElementsByClassName("vid")
-for (let i = 0; i < videos.length; i++) {
-  videos[i].addEventListener("play", onPlay)
-} 
-
 $(document).ready(function(){
 $(".copy-btn").on('click', function(evt){
 	$('.copied').html("Copy");
