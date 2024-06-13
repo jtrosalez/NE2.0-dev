@@ -244,6 +244,9 @@ function initializeMap() {
 					$("#geoid22").text(geoid22); //Only display the GEOID if the address is geocoded to California
 				}else{
 					var tractName22 = "Only use a California address."
+					var cong22 = "Only use a California address."
+					var sldl22 = "Only use a California address."
+					var sldu22 = "Only use a California address."
 					$("#geoid22").text('Only use a California address.');
 				}
 				console.log(tractName22);
@@ -273,7 +276,7 @@ function initializeMap() {
 				if (slduState == "CA"){
 					$("#slduName").text(slduName + ' (' + slduParty + ')');
 				}else{
-					$("#slduName").text("Only use a California address.");
+					$("#slduName").text("");
 				}
 			}
 		});
@@ -287,7 +290,11 @@ function initializeMap() {
 				var sldlName = (response.officials[0].name);
 				var sldlParty = (response.officials[0].party);
 				console.log(sldlName);
-				$("#sldlName").text(sldlName + ' (' + sldlParty + ')');
+				if (sldlState == "CA"){
+					$("#sldlName").text(sldlName + ' (' + sldlParty + ')');
+				}else{
+					$("#sldlName").text("");
+				}
 			}
 		});
 		
@@ -300,7 +307,11 @@ function initializeMap() {
 				var congName = (response.officials[0].name);
 				var congParty = (response.officials[0].party);
 				console.log(congName);
-				$("#congName").text(congName + ' (' + congParty + ')');
+				if (congState == "CA"){
+					$("#congName").text(congName + ' (' + congParty + ')');
+				}else{
+					$("#congName").text("");
+				}
 			}
 		});
 			
