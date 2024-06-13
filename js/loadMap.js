@@ -26,7 +26,7 @@ $(".copy-btn").on('click', function(evt){
 	$('.copied').removeClass('copied');
 	$(this).html("Copied");
 	$(this).addClass("copied");
-	$("#info").fadeOut(2500);
+	$("#info").fadeOut(2000);
 });
 	
 function initializeMap() {
