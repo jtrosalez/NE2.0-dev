@@ -262,7 +262,7 @@ function initializeMap() {
 			dataType: 'jsonp',
 			success: function(response){
 				console.log(response);
-				var slduState=(response.normalizedInput[0].state);
+				var slduState=(response.normalizedInput[state]);
 				var slduName = (response.officials[0].name);
 				var slduParty = (response.officials[0].party);
 				console.log(slduName);
