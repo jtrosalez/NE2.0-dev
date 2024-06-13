@@ -270,7 +270,7 @@ function initializeMap() {
 				if (slduState == "CA"){
 					$("#slduName").text(slduName + ' (' + slduParty + ')');
 				}else{
-					$("slduName").text("Only use a California address.");
+					$("#slduName").text("Only use a California address.");
 				}
 			}
 		});
