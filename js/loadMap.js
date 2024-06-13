@@ -208,6 +208,9 @@ function initializeMap() {
 					$("#geoid17").text(geoid17); //Only display the GEOID if the address is geocoded to California
 				}else{
 					var tractName17 = "Only use a California address."
+					var cong17 = "Only use a California address."
+					var sldl17 = "Only use a California address."
+					var sldu17 = "Only use a California address."
 					$("#geoid17").text('Only use a California address.');
 				}
 				console.log(tractName17);
