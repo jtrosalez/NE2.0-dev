@@ -10,7 +10,7 @@ function copyToClipboard(elementId) {
 		document.body.appendChild(aux);
 
 		// Highlight its content
-		aux.select();https://public.tableau.com/views/AskCHISNE2_0-dev/Map
+		aux.select();
 
 		// Copy the highlighted text
 		document.execCommand("copy");
@@ -26,6 +26,7 @@ $(".copy-btn").on('click', function(evt){
 	$('.copied').removeClass('copied');
 	$(this).html("Copied");
 	$(this).addClass("copied");
+	$("#info").hide();
 });
 	
 function initializeMap() {
