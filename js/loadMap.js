@@ -262,10 +262,15 @@ function initializeMap() {
 			dataType: 'jsonp',
 			success: function(response){
 				console.log(response);
+				var slduState=(response.normalizedInput[0].state);
 				var slduName = (response.officials[0].name);
 				var slduParty = (response.officials[0].party);
 				console.log(slduName);
-				$("#slduName").text(slduName + ' (' + slduParty + ')');
+				if (slduState == "CA"){
+					$("#slduName").text(slduName + ' (' + slduParty + ')');
+				}else{
+					$("slduName").text("Only use a California address.");
+				}
 			}
 		});
 		
@@ -274,6 +279,7 @@ function initializeMap() {
 			dataType: 'jsonp',
 			success: function(response){
 				console.log(response);
+				var sldlState=(response.normalizedInput[0].state);
 				var sldlName = (response.officials[0].name);
 				var sldlParty = (response.officials[0].party);
 				console.log(sldlName);
@@ -286,6 +292,7 @@ function initializeMap() {
 			dataType: 'jsonp',
 			success: function(response){
 				console.log(response);
+				var congState=(response.normalizedInput[0].state);
 				var congName = (response.officials[0].name);
 				var congParty = (response.officials[0].party);
 				console.log(congName);
