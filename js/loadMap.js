@@ -266,6 +266,7 @@ function initializeMap() {
 				var slduName = (response.officials[0].name);
 				var slduParty = (response.officials[0].party);
 				console.log(slduName);
+				console.log(slduState);
 				if (slduState == "CA"){
 					$("#slduName").text(slduName + ' (' + slduParty + ')');
 				}else{
