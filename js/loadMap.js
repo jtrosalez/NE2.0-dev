@@ -262,7 +262,7 @@ function initializeMap() {
 			dataType: 'jsonp',
 			success: function(response){
 				console.log(response);
-				var slduState=(response.normalizedInput[state]);
+				var slduState=(response.normalizedInput['state']);
 				var slduName = (response.officials[0].name);
 				var slduParty = (response.officials[0].party);
 				console.log(slduName);
@@ -279,7 +279,7 @@ function initializeMap() {
 			dataType: 'jsonp',
 			success: function(response){
 				console.log(response);
-				var sldlState=(response.normalizedInput[0].state);
+				var sldlState=(response.normalizedInput['state']);
 				var sldlName = (response.officials[0].name);
 				var sldlParty = (response.officials[0].party);
 				console.log(sldlName);
@@ -292,7 +292,7 @@ function initializeMap() {
 			dataType: 'jsonp',
 			success: function(response){
 				console.log(response);
-				var congState=(response.normalizedInput[0].state);
+				var congState=(response.normalizedInput['state']);
 				var congName = (response.officials[0].name);
 				var congParty = (response.officials[0].party);
 				console.log(congName);
