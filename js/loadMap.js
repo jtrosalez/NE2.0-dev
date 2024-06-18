@@ -37,6 +37,7 @@ function initializeMap() {
 				//height: placeholderDiv.offsetHeight,
 				hideTabs: true,
 				hideToolbar: true,
+				allowFullscreen: false,
 				onFirstInteractive: function () {
 					workbook = viz.getWorkbook();
 					activeSheet = workbook.getActiveSheet();
