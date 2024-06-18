@@ -27,6 +27,7 @@ $(".copy-btn").on('click', function(evt){
 	$(this).html("Copied");
 	$(this).addClass("copied");
 	$("#info").fadeOut(2000);
+	$("#tract17").text("");
 });
 	
 function initializeMap() {
