@@ -197,7 +197,8 @@ function initializeMap() {
 			dataType: 'jsonp',
 			success: function(response) {
 				console.log(response.result.addressMatches[0].geographies); //This will allow you to view all the results that you get for the address geocoder
-				var tract17 = (response.result.addressMatches[0].geographies['Census Tracts'][0]['NAME']); //Remove the word Census from the tract name to match the AskCHIS Census Tract naming convention
+				var tract17v1 = (response.result.addressMatches[0].geographies['Census Tracts'][0]['NAME']); //Remove the word Census from the tract name to match the AskCHIS Census Tract naming convention
+				var tract17 = tract17v1.replace("Census ",'');
 				var cong17 = (response.result.addressMatches[0].geographies['115th Congressional Districts'][0]['NAME']);
 				var sldl17 = (response.result.addressMatches[0].geographies['2016 State Legislative Districts - Lower'][0]['NAME']);
 				var sldu17 = (response.result.addressMatches[0].geographies['2016 State Legislative Districts - Upper'][0]['NAME']);
@@ -206,7 +207,7 @@ function initializeMap() {
 				var geoid17 = (response.result.addressMatches[0].geographies['Census Tracts'][0]['GEOID']).substr(1); //Remove the first value from the GEOID to match the AskCHIS GEOID
 				
 				if(state == "California"){
-					var tractName17 = tract17  + ', ' + county + ', California'; //Only display the tract name if the address is geocoded to California
+					var tractName17 =county + ' ' + tract17; //Only display the tract name if the address is geocoded to California
 					$("#geoid17").text(geoid17); //Only display the GEOID if the address is geocoded to California
 				}else{
 					var tractName17 = "Only use a California address."
