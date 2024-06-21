@@ -207,7 +207,7 @@ function initializeMap() {
 				var geoid17 = (response.result.addressMatches[0].geographies['Census Tracts'][0]['GEOID']).substr(1); //Remove the first value from the GEOID to match the AskCHIS GEOID
 				
 				if(state == "California"){
-					var tractName17 =county + ' ' + tract17; //Only display the tract name if the address is geocoded to California
+					var tractName17 = county + ' ' + tract17; //Only display the tract name if the address is geocoded to California
 					$("#geoid17").text(geoid17); //Only display the GEOID if the address is geocoded to California
 				}else{
 					var tractName17 = "Only use a California address."
@@ -234,7 +234,8 @@ function initializeMap() {
 			dataType: 'jsonp',
 			success: function(response) {
 				console.log(response.result.addressMatches[0].geographies); //This will allow you to view all the results that you get for the address geocoder
-				var tract22 = (response.result.addressMatches[0].geographies['Census Tracts'][0]['NAME']); //Remove the word Census from the tract name to match the AskCHIS Census Tract naming convention
+				var tract22v1 = (response.result.addressMatches[0].geographies['Census Tracts'][0]['NAME']); //Remove the word Census from the tract name to match the AskCHIS Census Tract naming convention
+				var tract22 = tract22v1.replace("Census ",'');
 				var cong22 = (response.result.addressMatches[0].geographies['118th Congressional Districts'][0]['NAME']);
 				var sldl22 = (response.result.addressMatches[0].geographies['2022 State Legislative Districts - Lower'][0]['NAME']);
 				var sldu22 = (response.result.addressMatches[0].geographies['2022 State Legislative Districts - Upper'][0]['NAME']);
@@ -243,7 +244,7 @@ function initializeMap() {
 				var geoid22 = (response.result.addressMatches[0].geographies['Census Tracts'][0]['GEOID']).substr(1); //Remove the first value from the GEOID to match the AskCHIS GEOID
 				
 				if(state == "California"){
-					var tractName22 = tract22 + ', ' + county + ', California'; //Only display the tract name if the address is geocoded to California
+					var tractName22 =  county + ' ' + tract22; //Only display the tract name if the address is geocoded to California
 					$("#geoid22").text(geoid22); //Only display the GEOID if the address is geocoded to California
 				}else{
 					var tractName22 = "Only use a California address."
