@@ -273,9 +273,9 @@ function initializeMap() {
 			dataType: 'jsonp',
 			success: function(response){
 				var error = response.error;
-				IF (error == "error"){
+				if (error == "error"){
 					$("span").text('Unable to find a geography from the address provided.');
-				}
+				}else{$("span").text("");}
 				var slduState=(response.normalizedInput['state']);
 				var slduName = (response.officials[0].name);
 				var slduParty = (response.officials[0].party);
