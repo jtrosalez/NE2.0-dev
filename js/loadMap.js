@@ -272,7 +272,7 @@ function initializeMap() {
 			url: urlSLDU,
 			dataType: 'jsonp',
 			success: function(response){
-				var error = response.error;
+				var error = response.error.code;
 				console.log(error);
 				/*if (error == "error"){
 					$("span").text('Unable to find a geography from the address provided.');
