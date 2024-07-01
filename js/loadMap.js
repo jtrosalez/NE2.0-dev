@@ -275,6 +275,8 @@ function initializeMap() {
 				var error = response.error;
 				if (error == "error"){
 					$("span").text('Unable to find a geography from the address provided.');
+					$("#name17").show();
+					$("#name22").show();
 				}else{$("span").text("");}
 				var slduState=(response.normalizedInput['state']);
 				var slduName = (response.officials[0].name);
