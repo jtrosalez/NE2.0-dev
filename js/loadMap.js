@@ -274,11 +274,11 @@ function initializeMap() {
 			success: function(response){
 				var error = response.error.code;
 				console.log(error);
-				/*if (error == "error"){
+				if (error == '400'){
 					$("span").text('Unable to find a geography from the address provided.');
 					$("#name17").show();
 					$("#name22").show();
-				}else{$("span").text("");}*/
+				}
 				var slduState=(response.normalizedInput['state']);
 				var slduName = (response.officials[0].name);
 				var slduParty = (response.officials[0].party);
