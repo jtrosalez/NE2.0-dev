@@ -223,7 +223,7 @@ function initializeMap() {
 				$("#sldl17").text(sldl17);
 				$("#sldu17").text(sldu17);
 			},
-			error: function(error) {
+			error: function(jqXHR, exception) {
 				console.log(error);
 				$("span").text('Unable to find a Census Tract from the address provided.');
 				$("#name17").show();
@@ -260,7 +260,7 @@ function initializeMap() {
 				$("#sldl22").text(sldl22);
 				$("#sldu22").text(sldu22);
 			},
-			error: function(error) {
+			error: function(jqXHR, exception) {
 				console.log(error);
 				$("span").text('Unable to find a Census Tract from the address provided.');
 				$("#name22").show();
