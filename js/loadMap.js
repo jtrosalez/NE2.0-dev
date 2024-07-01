@@ -195,7 +195,7 @@ function initializeMap() {
 		$.ajax({
 			url: url17,
 			type: 'POST',
-			dataType: 'text',
+			dataType: 'jsonp',
 			async: false,
 			success: function(response) {
 				//console.log(response.result.addressMatches[0].geographies); //This will allow you to view all the results that you get for the address geocoder
