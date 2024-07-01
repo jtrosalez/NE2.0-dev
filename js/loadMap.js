@@ -225,6 +225,7 @@ function initializeMap() {
 			},
 			error: function(error) {
 				console.log(error);
+				console.log("ERROR");
 				$("span").text('Unable to find a Census Tract from the address provided.');
 				$("#name17").show();
 			}
