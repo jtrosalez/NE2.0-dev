@@ -194,7 +194,7 @@ function initializeMap() {
 
 		$.ajax({
 			url: url17,
-			dataType: 'json',
+			dataType: 'jsonp',
 			success: function(response) {
 				console.log(response.result.addressMatches[0].geographies); //This will allow you to view all the results that you get for the address geocoder
 				var tract17v1 = (response.result.addressMatches[0].geographies['Census Tracts'][0]['NAME']); //Remove the word Census from the tract name to match the AskCHIS Census Tract naming convention
@@ -231,7 +231,7 @@ function initializeMap() {
 		});
 		$.ajax({
 			url: url22,
-			dataType: 'json',
+			dataType: 'jsonp',
 			success: function(response) {
 				console.log(response.result.addressMatches[0].geographies); //This will allow you to view all the results that you get for the address geocoder
 				var tract22v1 = (response.result.addressMatches[0].geographies['Census Tracts'][0]['NAME']); //Remove the word Census from the tract name to match the AskCHIS Census Tract naming convention
@@ -269,7 +269,7 @@ function initializeMap() {
 		
 		$.ajax({
 			url: urlSLDU,
-			dataType: 'json',
+			dataType: 'jsonp',
 			success: function(response){
 				console.log(response);
 				var slduState=(response.normalizedInput['state']);
@@ -287,7 +287,7 @@ function initializeMap() {
 		
 		$.ajax({
 			url: urlSLDL,
-			dataType: 'json',
+			dataType: 'jsonp',
 			success: function(response){
 				console.log(response);
 				var sldlState=(response.normalizedInput['state']);
@@ -304,7 +304,7 @@ function initializeMap() {
 		
 		$.ajax({
 			url: urlCONG,
-			dataType: 'json',
+			dataType: 'jsonp',
 			success: function(response){
 				console.log(response);
 				var congState=(response.normalizedInput['state']);
