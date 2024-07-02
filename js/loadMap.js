@@ -274,7 +274,7 @@ function initializeMap() {
 			dataType: 'jsonp',
 			success: function(response){
 				var error = (JSON.stringify(response).slice(0,8));
-				console.log(error);
+				if (error == '{"error"'){console.log("ERROR")}else{console.log("GOOD TO GO!");}
 				var slduState=(response.normalizedInput['state']);
 				var slduName = (response.officials[0].name);
 				var slduParty = (response.officials[0].party);
