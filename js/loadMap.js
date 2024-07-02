@@ -274,16 +274,20 @@ function initializeMap() {
 			dataType: 'jsonp',
 			success: function(response){
 				var error = (JSON.stringify(response).slice(0,8));
-				if (error == '{"error"'){console.log("ERROR")}else{console.log("GOOD TO GO!");}
-				var slduState=(response.normalizedInput['state']);
-				var slduName = (response.officials[0].name);
-				var slduParty = (response.officials[0].party);
-				console.log(slduName);
-				console.log(slduState);
-				if (slduState == "CA"){
-					$("#slduName").text(slduName + ' (' + slduParty + ')');
+				if (error == '{"error"'){
+					console.log("ERROR");
+					$("span").text('Unable to find a geography from the address provided.');
 				}else{
-					$("#slduName").text("");
+					var slduState=(response.normalizedInput['state']);
+					var slduName = (response.officials[0].name);
+					var slduParty = (response.officials[0].party);
+					console.log(slduName);
+					console.log(slduState);
+					if (slduState == "CA"){
+						$("#slduName").text(slduName + ' (' + slduParty + ')');
+					}else{
+						$("#slduName").text("");
+					}
 				}
 			}
 		});
@@ -292,14 +296,19 @@ function initializeMap() {
 			url: urlSLDL,
 			dataType: 'jsonp',
 			success: function(response){
-				var sldlState=(response.normalizedInput['state']);
-				var sldlName = (response.officials[0].name);
-				var sldlParty = (response.officials[0].party);
-				console.log(sldlName);
-				if (sldlState == "CA"){
-					$("#sldlName").text(sldlName + ' (' + sldlParty + ')');
+				var error = (JSON.stringify(response).slice(0,8));
+				if (error == '{"error"'){
+					console.log("ERROR");
 				}else{
-					$("#sldlName").text("");
+					var sldlState=(response.normalizedInput['state']);
+					var sldlName = (response.officials[0].name);
+					var sldlParty = (response.officials[0].party);
+					console.log(sldlName);
+					if (sldlState == "CA"){
+						$("#sldlName").text(sldlName + ' (' + sldlParty + ')');
+					}else{
+						$("#sldlName").text("");
+					}
 				}
 			}
 		});
@@ -308,15 +317,19 @@ function initializeMap() {
 			url: urlCONG,
 			dataType: 'jsonp',
 			success: function(response){
-				console.log(response);
-				var congState=(response.normalizedInput['state']);
-				var congName = (response.officials[0].name);
-				var congParty = (response.officials[0].party);
-				console.log(congName);
-				if (congState == "CA"){
-					$("#congName").text(congName + ' (' + congParty + ')');
+				var error = (JSON.stringify(response).slice(0,8));
+				if (error == '{"error"'){
+					console.log("ERROR");
 				}else{
-					$("#congName").text("");
+					var congState=(response.normalizedInput['state']);
+					var congName = (response.officials[0].name);
+					var congParty = (response.officials[0].party);
+					console.log(congName);
+					if (congState == "CA"){
+						$("#congName").text(congName + ' (' + congParty + ')');
+					}else{
+						$("#congName").text("");
+					}
 				}
 			}
 		});
