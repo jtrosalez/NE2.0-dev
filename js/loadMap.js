@@ -235,37 +235,37 @@ function initializeMap() {
 			url: url22,
 			dataType: 'jsonp',
 			success: function(response) {
-				console.log(response.result.addressMatches[0].geographies); //This will allow you to view all the results that you get for the address geocoder
-				var tract22v1 = (response.result.addressMatches[0].geographies['Census Tracts'][0]['NAME']); //Remove the word Census from the tract name to match the AskCHIS Census Tract naming convention
-				var tract22 = tract22v1.replace("Census ",'');
-				var cong22 = (response.result.addressMatches[0].geographies['118th Congressional Districts'][0]['NAME']);
-				var sldl22 = (response.result.addressMatches[0].geographies['2022 State Legislative Districts - Lower'][0]['NAME']);
-				var sldu22 = (response.result.addressMatches[0].geographies['2022 State Legislative Districts - Upper'][0]['NAME']);
-				var county = (response.result.addressMatches[0].geographies['Counties'][0]['NAME']);
-				var state = (response.result.addressMatches[0].geographies['States'][0]['NAME']);
-				var geoid22 = (response.result.addressMatches[0].geographies['Census Tracts'][0]['GEOID']).substr(1); //Remove the first value from the GEOID to match the AskCHIS GEOID
-				
-				if(state == "California"){
-					var tractName22 =  county + ' ' + tract22; //Only display the tract name if the address is geocoded to California
-					$("#geoid22").text(geoid22); //Only display the GEOID if the address is geocoded to California
+				var error = JSON.stringify(response.result.addressMatches);
+				if (error == "[]"){
+					console.log("ERROR");
 				}else{
-					var tractName22 = "Only use a California address."
-					var cong22 = "Only use a California address."
-					var sldl22 = "Only use a California address."
-					var sldu22 = "Only use a California address."
-					$("#geoid22").text('Only use a California address.');
+					console.log(response.result.addressMatches[0].geographies); //This will allow you to view all the results that you get for the address geocoder
+					var tract22v1 = (response.result.addressMatches[0].geographies['Census Tracts'][0]['NAME']); //Remove the word Census from the tract name to match the AskCHIS Census Tract naming convention
+					var tract22 = tract22v1.replace("Census ",'');
+					var cong22 = (response.result.addressMatches[0].geographies['118th Congressional Districts'][0]['NAME']);
+					var sldl22 = (response.result.addressMatches[0].geographies['2022 State Legislative Districts - Lower'][0]['NAME']);
+					var sldu22 = (response.result.addressMatches[0].geographies['2022 State Legislative Districts - Upper'][0]['NAME']);
+					var county = (response.result.addressMatches[0].geographies['Counties'][0]['NAME']);
+					var state = (response.result.addressMatches[0].geographies['States'][0]['NAME']);
+					var geoid22 = (response.result.addressMatches[0].geographies['Census Tracts'][0]['GEOID']).substr(1); //Remove the first value from the GEOID to match the AskCHIS GEOID
+				
+						if(state == "California"){
+							var tractName22 =  county + ' ' + tract22; //Only display the tract name if the address is geocoded to California
+							$("#geoid22").text(geoid22); //Only display the GEOID if the address is geocoded to California
+						}else{
+							var tractName22 = "Only use a California address."
+							var cong22 = "Only use a California address."
+							var sldl22 = "Only use a California address."
+							var sldu22 = "Only use a California address."
+							$("#geoid22").text('Only use a California address.');
+						}
+					console.log(tractName22);
+					$("#tract22").text(tractName22);
+					$("#name22").show();
+					$("#cong22").text(cong22);
+					$("#sldl22").text(sldl22);
+					$("#sldu22").text(sldu22);
 				}
-				console.log(tractName22);
-				$("#tract22").text(tractName22);
-				$("#name22").show();
-				$("#cong22").text(cong22);
-				$("#sldl22").text(sldl22);
-				$("#sldu22").text(sldu22);
-			},
-			error: function(error) {
-				console.log(error);
-				$("span").text('Unable to find a geography from the address provided.');
-				$("#name22").show();
 			}
 		});
 		
@@ -273,13 +273,6 @@ function initializeMap() {
 			url: urlSLDU,
 			dataType: 'jsonp',
 			success: function(response){
-				/*var error = response.error.code;
-				console.log(error);
-				if (error == '400'){
-					$("span").text('Unable to find a geography from the address provided.');
-					$("#name17").show();
-					$("#name22").show();
-				}*/
 				var slduState=(response.normalizedInput['state']);
 				var slduName = (response.officials[0].name);
 				var slduParty = (response.officials[0].party);
