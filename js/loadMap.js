@@ -272,13 +272,13 @@ function initializeMap() {
 			url: urlSLDU,
 			dataType: 'jsonp',
 			success: function(response){
-				var error = response.error.code;
+				/*var error = response.error.code;
 				console.log(error);
 				if (error == '400'){
 					$("span").text('Unable to find a geography from the address provided.');
 					$("#name17").show();
 					$("#name22").show();
-				}
+				}*/
 				var slduState=(response.normalizedInput['state']);
 				var slduName = (response.officials[0].name);
 				var slduParty = (response.officials[0].party);
