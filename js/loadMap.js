@@ -223,7 +223,7 @@ function initializeMap() {
 				$("#sldl17").text(sldl17);
 				$("#sldu17").text(sldu17);
 			},
-			error: function(error) {
+			fail: function(error) {
 				console.log(error);
 				console.log("ERROR");
 				$("span").text('Unable to find a geography from the address provided.');
