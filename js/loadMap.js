@@ -290,7 +290,7 @@ function initializeMap() {
 			url: urlSLDL,
 			dataType: 'jsonp',
 			success: function(response){
-				console.log(response);
+				console.log(JSON.stringify(response));
 				var sldlState=(response.normalizedInput['state']);
 				var sldlName = (response.officials[0].name);
 				var sldlParty = (response.officials[0].party);
