@@ -197,8 +197,12 @@ function initializeMap() {
 			dataType: 'jsonp',
 			success: function(response) {
 				var error = JSON.stringify(response.result.addressMatches);
-				if (error == "[]"){console.log("ERROR");}else{console.log("GOOD TO GO!!!!");}
-				//console.log(response.result.addressMatches[0].geographies); //This will allow you to view all the results that you get for the address geocoder
+				if (error == "[]"){
+					console.log("ERROR");
+					$("span").text('Unable to find a geography from the address provided.');
+					$("#name17").show();
+				}else{
+				console.log(response.result.addressMatches[0].geographies); //This will allow you to view all the results that you get for the address geocoder
 				var tract17v1 = (response.result.addressMatches[0].geographies['Census Tracts'][0]['NAME']); //Remove the word Census from the tract name to match the AskCHIS Census Tract naming convention
 				var tract17 = tract17v1.replace("Census ",'');
 				var cong17 = (response.result.addressMatches[0].geographies['115th Congressional Districts'][0]['NAME']);
@@ -208,28 +212,23 @@ function initializeMap() {
 				var state = (response.result.addressMatches[0].geographies['States'][0]['NAME']);
 				var geoid17 = (response.result.addressMatches[0].geographies['Census Tracts'][0]['GEOID']).substr(1); //Remove the first value from the GEOID to match the AskCHIS GEOID
 				
-				if(state == "California"){
-					var tractName17 = county + ' ' + tract17; //Only display the tract name if the address is geocoded to California
-					$("#geoid17").text(geoid17); //Only display the GEOID if the address is geocoded to California
-				}else{
-					var tractName17 = "Only use a California address."
-					var cong17 = "Only use a California address."
-					var sldl17 = "Only use a California address."
-					var sldu17 = "Only use a California address."
-					$("#geoid17").text('Only use a California address.');
-				}
+					if(state == "California"){
+						var tractName17 = county + ' ' + tract17; //Only display the tract name if the address is geocoded to California
+						$("#geoid17").text(geoid17); //Only display the GEOID if the address is geocoded to California
+					}else{
+						var tractName17 = "Only use a California address."
+						var cong17 = "Only use a California address."
+						var sldl17 = "Only use a California address."
+						var sldu17 = "Only use a California address."
+						$("#geoid17").text('Only use a California address.');
+					}
 				console.log(tractName17);
 				$("#tract17").text(tractName17);
 				$("#name17").show();
 				$("#cong17").text(cong17);
 				$("#sldl17").text(sldl17);
 				$("#sldu17").text(sldu17);
-			},
-			fail: function(error) {
-				console.log(error);
-				console.log("ERROR");
-				$("span").text('Unable to find a geography from the address provided.');
-				$("#name17").show();
+				}
 			}
 		});
 		$.ajax({
