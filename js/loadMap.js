@@ -273,6 +273,8 @@ function initializeMap() {
 			url: urlSLDU,
 			dataType: 'jsonp',
 			success: function(response){
+				var error = (JSON.stringify(response).slice(0,8));
+				console.log(error);
 				var slduState=(response.normalizedInput['state']);
 				var slduName = (response.officials[0].name);
 				var slduParty = (response.officials[0].party);
@@ -290,7 +292,6 @@ function initializeMap() {
 			url: urlSLDL,
 			dataType: 'jsonp',
 			success: function(response){
-				console.log(JSON.stringify(response));
 				var sldlState=(response.normalizedInput['state']);
 				var sldlName = (response.officials[0].name);
 				var sldlParty = (response.officials[0].party);
