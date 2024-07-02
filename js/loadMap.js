@@ -196,7 +196,8 @@ function initializeMap() {
 			url: url17,
 			dataType: 'jsonp',
 			success: function(response) {
-				console.log(JSON.stringify(response.result.addressMatches));
+				var error = JSON.stringify(response.result.addressMatches);
+				if (error == "[]"){console.log("ERROR");}else{console.log("GOOD TO GO!!!!");}
 				//console.log(response.result.addressMatches[0].geographies); //This will allow you to view all the results that you get for the address geocoder
 				var tract17v1 = (response.result.addressMatches[0].geographies['Census Tracts'][0]['NAME']); //Remove the word Census from the tract name to match the AskCHIS Census Tract naming convention
 				var tract17 = tract17v1.replace("Census ",'');
