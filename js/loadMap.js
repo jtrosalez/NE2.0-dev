@@ -29,6 +29,15 @@ $(".copy-btn").on('click', function(evt){
 	$("#info").fadeOut(2000);
 	$("#tract17").text("");
 });
+
+	function onFilterSelection(filterEvent) {
+        filterEvent.getFilterAsync().then(function(filter) {
+          let values = filter.getAppliedValues();
+          //let values = filter.$9; // Also works but less reliable.
+          console.log(values);
+          document.getElementById('output').innerHTML = 'Values selected: ' + JSON.stringify(values);
+        });
+      }
 	
 function initializeMap() {
 			var placeholderDiv = document.getElementById("tableauViz");
@@ -48,6 +57,7 @@ function initializeMap() {
 				}
 			};
 			viz = new tableau.Viz(placeholderDiv, url, options);
+			viz.addEventListener(tableau.TableauEventName.FILTER_CHANGE, onFilterSelection);
 		}    
 
 		function initializeTable() {
