@@ -35,7 +35,7 @@ $(".copy-btn").on('click', function(evt){
           let values = filter.getAppliedValues();
           //let values = filter.$9; // Also works but less reliable.
           console.log(values);
-          console.log(viz.getWorkbook().getActiveSheet().getWorksheets().get("Sheet").getFiltersAsync());
+          console.log(viz.getWorkbook().getActiveSheet().getWorksheets().get("Map").getFiltersAsync());
         });
       }
 	
